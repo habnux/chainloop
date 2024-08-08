@@ -129,18 +129,14 @@ case $UNAME_ARC in
     ;;
 esac
 
-case $OSTYPE in
-"linux-gnu"*)
-    OS="linux"
-    ;;
-"darwin"*)
-    OS="darwin"
-    ;;
-*)
-    fancy_print 1 "The OSTYPE: ${OSTYPE} is not supported by this script."
+if [[ "$OSTYPE" == linux* ]]; then
+  OS=linux
+elif [[ "$OSTYPE" == darwin* ]]; then
+  OS=darwin
+else
+    fancy_print 1 "Unsupported operating system: $OSTYPE"
     exit 1
-    ;;
-esac
+fi
 
 # Check desired version. Default to latest if no desired version was requested
 if [[ $VERSION = "" ]]; then
